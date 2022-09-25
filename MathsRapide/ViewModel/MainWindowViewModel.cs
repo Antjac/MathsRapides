@@ -161,10 +161,16 @@ namespace MathsRapide.ViewModel
 
         private async void speechRecognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            
+
+            if (UserRes != string.Empty)
+                return;
+
+            if (e.Result.Confidence < 0.7)
+                return;
+
             UserRes = e.Result.Text;
 
-            if (Operation.CheckValid(int.Parse(UserRes)))
+            if (Operation.IsValid(int.Parse(UserRes)))
             {
                 ColorRes = "Green";
                 timer.Stop();

@@ -36,7 +36,7 @@ namespace MathsRapide.ViewModel.Classes
 
         public abstract string Operateur { get; }
 
-        public abstract bool CheckValid(int res);
+        public abstract bool IsValid(int res);
 
         public abstract int GetResult();
 

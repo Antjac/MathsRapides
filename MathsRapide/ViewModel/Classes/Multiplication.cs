@@ -21,7 +21,7 @@ namespace MathsRapide.ViewModel.Classes
         public override string Operateur => "X";
 
 
-        public override bool CheckValid(int res)
+        public override bool IsValid(int res)
         {
             return (ValA * ValB == res);
         }
