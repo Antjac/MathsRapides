@@ -161,10 +161,7 @@ namespace MathsRapide.ViewModel
 
         private async void speechRecognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            if (e.Result.Confidence < 0.9)
-            {
-                return;
-            }
+            
             UserRes = e.Result.Text;
 
             if (Operation.CheckValid(int.Parse(UserRes)))

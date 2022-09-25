@@ -37,10 +37,7 @@ namespace MathsRapide.ViewModel.Classes
 
         public override int GetResult()
         {
-            return (ValB - ValB);
+            return (ValA - ValB);
         }
-
-
-
     }
 }
