@@ -109,20 +109,21 @@ namespace MathsRapide.ViewModel
             while (choiceMade == false)
             {
                 var op = rand.Next(1, 4);
+                var a = rand.Next(1, 10);
+                var b = rand.Next(1, 10);
                 switch (op)
                 {
                     case 1:
                         if (IsAdditionAllowed)
                         {
-                            Operation = new Addition(rand.Next(1, 10), rand.Next(1, 10));
+                            Operation = new Addition(a,b);
                             choiceMade = true;
                         }
                         break;
                     case 2:
                         if (IsSoustractionAllowed)
                         {
-                            var a = rand.Next(1, 10);
-                            var b = rand.Next(1, 10);
+
                             Operation = new Soustraction(Math.Max(a,b), Math.Min(a,b));
                             choiceMade = true;
                         }
@@ -130,7 +131,7 @@ namespace MathsRapide.ViewModel
                     case 3:
                         if (IsMultiplicationAllowed)
                         {
-                            Operation = new Multiplication(rand.Next(1, 10), rand.Next(1, 10));
+                            Operation = new Multiplication(a, b);
                             choiceMade = true;
                         }
                         break;
