@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Linq;
-using System.Windows.Controls;
 using System.Speech.Synthesis;
 
 namespace MathsRapide.ViewModel
@@ -102,9 +101,8 @@ namespace MathsRapide.ViewModel
         {
             rand = new Random();
             IsAdditionAllowed = true;
-            GenerateNew();
             RecognizeVoiceLocal();
-            speechRecognizerLocal.RecognizeAsync(RecognizeMode.Multiple);
+            GenerateNew();
         }
 
         private void GenerateNew()
@@ -156,7 +154,7 @@ namespace MathsRapide.ViewModel
             grammarBuilder.Append(Operation.GetChoices());
             speechRecognizerLocal.UnloadAllGrammars();
             speechRecognizerLocal.LoadGrammar(new Grammar(grammarBuilder));
-
+            speechRecognizerLocal.RecognizeAsync(RecognizeMode.Multiple);
             timer.Restart();
             timer.Start();
 
@@ -192,6 +190,7 @@ namespace MathsRapide.ViewModel
 
         private async void CheckAndShowNext()
         {
+            speechRecognizerLocal.RecognizeAsyncStop();
             if (Operation.IsValid(int.Parse(UserRes)))
             {
                 ColorRes = "Green";
