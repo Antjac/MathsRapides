@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Linq;
+using System.Windows.Controls;
+using System.Speech.Synthesis;
 
 namespace MathsRapide.ViewModel
 {
@@ -19,11 +21,11 @@ namespace MathsRapide.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
+        private SpeechSynthesizer speaker = new SpeechSynthesizer();
 
         public Operation Operation;
 
-   
+        public bool IsSpeaking { get; set; }
         public bool IsAdditionAllowed { get; set; }
 
         public bool IsMultiplicationAllowed { get; set; }
@@ -83,12 +85,14 @@ namespace MathsRapide.ViewModel
 
         private Random rand;
         private Stopwatch timer = new Stopwatch();
-        private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("fr-FR"));
+        private SpeechRecognitionEngine speechRecognizerLocal = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("fr-FR"));
 
         public int ValA { get { return Operation.ValA; } }
         public int ValB { get { return Operation.ValB; } }
 
         public string Operateur { get { return Operation.Operateur; } }
+
+        public string OperateurPrononciation { get { return Operation.OperateurPrononciation; } }
         public double AverageTime
         {
             get { return timeElapsed.Average(); }
@@ -99,8 +103,8 @@ namespace MathsRapide.ViewModel
             rand = new Random();
             IsAdditionAllowed = true;
             GenerateNew();
-            RecognizeVoice();
-            speechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
+            RecognizeVoiceLocal();
+            speechRecognizerLocal.RecognizeAsync(RecognizeMode.Multiple);
         }
 
         private void GenerateNew()
@@ -143,24 +147,37 @@ namespace MathsRapide.ViewModel
             this.OnPropertyChanged(nameof(ValA));
             this.OnPropertyChanged(nameof(ValB));
             this.OnPropertyChanged(nameof(Operateur));
+
+            if (IsSpeaking)
+            {
+                Speak();
+            }
             GrammarBuilder grammarBuilder = new GrammarBuilder();
             grammarBuilder.Append(Operation.GetChoices());
-            speechRecognizer.UnloadAllGrammars();
-            speechRecognizer.LoadGrammar(new Grammar(grammarBuilder));
+            speechRecognizerLocal.UnloadAllGrammars();
+            speechRecognizerLocal.LoadGrammar(new Grammar(grammarBuilder));
 
             timer.Restart();
             timer.Start();
+
         }
 
-
-        private void RecognizeVoice()
+        private void Speak()
         {
-            speechRecognizer.SpeechRecognized += speechRecognizer_SpeechRecognized;
-            speechRecognizer.SetInputToDefaultAudioDevice();
+            speaker.Rate = 1;
+            speaker.Volume = 100;
+            speaker.Speak(ValA.ToString() + OperateurPrononciation + ValB.ToString());
         }
 
+        private void RecognizeVoiceLocal()
+        {
+            speechRecognizerLocal.SpeechRecognized += speechRecognizer_SpeechRecognizedLocal;
+            speechRecognizerLocal.SetInputToDefaultAudioDevice();
+        }
 
-        private async void speechRecognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        
+
+        private async void speechRecognizer_SpeechRecognizedLocal(object sender, SpeechRecognizedEventArgs e)
         {
 
             if (UserRes != string.Empty)
@@ -170,7 +187,11 @@ namespace MathsRapide.ViewModel
                 return;
 
             UserRes = e.Result.Text;
+            CheckAndShowNext();
+        }
 
+        private async void CheckAndShowNext()
+        {
             if (Operation.IsValid(int.Parse(UserRes)))
             {
                 ColorRes = "Green";

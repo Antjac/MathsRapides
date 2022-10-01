@@ -18,7 +18,7 @@ namespace MathsRapide.ViewModel.Classes
         }
 
         public override string Operateur => "-";
-
+        public override string OperateurPrononciation => "Moins";
         public override bool IsValid(int res)
         {
             return (ValA - ValB == res);

@@ -19,7 +19,7 @@ namespace MathsRapide.ViewModel.Classes
 
 
         public override string Operateur => "X";
-
+        public override string OperateurPrononciation => "Fois";
 
         public override bool IsValid(int res)
         {

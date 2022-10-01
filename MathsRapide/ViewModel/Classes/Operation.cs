@@ -36,6 +36,8 @@ namespace MathsRapide.ViewModel.Classes
 
         public abstract string Operateur { get; }
 
+        public abstract string OperateurPrononciation { get; }
+
         public abstract bool IsValid(int res);
 
         public abstract int GetResult();
