@@ -31,7 +31,7 @@ namespace MathsRapide.ViewModel.Classes
         public override Choices GetChoices()
         {
             Choices numbers = new Choices();
-            for (int i = 1; i <= 18; i++)
+            for (int i = Math.Max(ValA + ValB - 3, 2); i <= (ValA + ValB + 3); i++)
             {
                 numbers.Add(i.ToString());
             }
