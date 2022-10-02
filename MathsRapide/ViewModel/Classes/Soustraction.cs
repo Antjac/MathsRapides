@@ -27,7 +27,7 @@ namespace MathsRapide.ViewModel.Classes
         public override Choices GetChoices()
         {
             Choices numbers = new Choices();
-            for (int i = 1; i <= 9; i++)
+            for (int i = Math.Max(ValA - ValB - 3, 0); i <= (ValA - ValB + 3); i++)
             {
                 numbers.Add(i.ToString());
             }
