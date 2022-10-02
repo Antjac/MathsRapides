@@ -25,6 +25,9 @@ namespace MathsRapide.ViewModel
         public Operation Operation;
 
         public bool IsSpeaking { get; set; }
+
+        public int Sensibility { get; set; }
+
         public bool IsAdditionAllowed { get; set; }
 
         public bool IsMultiplicationAllowed { get; set; }
@@ -100,6 +103,7 @@ namespace MathsRapide.ViewModel
         public MainWindowViewModel()
         {
             rand = new Random();
+            Sensibility = 70;
             IsAdditionAllowed = true;
             RecognizeVoiceLocal();
             GenerateNew();
@@ -181,7 +185,7 @@ namespace MathsRapide.ViewModel
             if (UserRes != string.Empty)
                 return;
 
-            if (e.Result.Confidence < 0.7)
+                                                                                                                                                                                                                                          if (e.Result.Confidence < Sensibility / 100)
                 return;
 
             UserRes = e.Result.Text;

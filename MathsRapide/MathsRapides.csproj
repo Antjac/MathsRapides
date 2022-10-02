@@ -5,10 +5,25 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Icons8-Windows-8-Science-Math.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="View\Icons8-Windows-8-Science-Math.ico" />
+    <None Remove="View\math.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Icons8-Windows-8-Science-Math.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Speech" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="View\Icons8-Windows-8-Science-Math.ico" />
+    <Resource Include="View\math.png" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MathsRapide.ViewModel"
         mc:Ignorable="d"
-        Title="Calculs rapides en vocal" Height="250" Width="500">
+        Title="Calculs rapides en vocal" Height="260" Width="500" Icon="/View/Icons8-Windows-8-Science-Math.ico">
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
@@ -22,5 +22,9 @@
         <CheckBox Content="Soustractions" IsChecked="{Binding Path=IsSoustractionAllowed, Mode=TwoWay}" HorizontalAlignment="Left" Margin="120,0,0,0" VerticalAlignment="Top"/>
         <CheckBox Content="Multiplications" IsChecked="{Binding Path=IsMultiplicationAllowed, Mode=TwoWay}" HorizontalAlignment="Left" Margin="236,0,0,0" VerticalAlignment="Top"/>
         <CheckBox Content="Calcul énoncé vocalement" IsChecked="{Binding IsSpeaking, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top"/>
+        <Label HorizontalAlignment="Left" Margin="80,190,0,0"  VerticalAlignment="Top" Width="94" FontSize="48">
+            <Slider Width="82" Maximum="100" Value="{Binding Path=Sensibility}"/>
+        </Label>
+        <Label Content="Sensibilité" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
