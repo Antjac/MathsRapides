@@ -185,7 +185,7 @@ namespace MathsRapide.ViewModel
             if (UserRes != string.Empty)
                 return;
 
-                                                                                                                                                                                                                                          if (e.Result.Confidence < Sensibility / 100)
+            if (e.Result.Confidence < Sensibility / 100)                                                                                                                                                                                                                                   if (e.Result.Confidence < Sensibility / 100)
                 return;
 
             UserRes = e.Result.Text;

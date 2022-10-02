@@ -23,7 +23,7 @@
         <CheckBox Content="Multiplications" IsChecked="{Binding Path=IsMultiplicationAllowed, Mode=TwoWay}" HorizontalAlignment="Left" Margin="236,0,0,0" VerticalAlignment="Top"/>
         <CheckBox Content="Calcul énoncé vocalement" IsChecked="{Binding IsSpeaking, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top"/>
         <Label HorizontalAlignment="Left" Margin="80,190,0,0"  VerticalAlignment="Top" Width="94" FontSize="48">
-            <Slider Width="82" Maximum="100" Value="{Binding Path=Sensibility}"/>
+            <Slider Width="82" Maximum="90" Value="{Binding Path=Sensibility}"/>
         </Label>
         <Label Content="Sensibilité" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top"/>
     </Grid>
